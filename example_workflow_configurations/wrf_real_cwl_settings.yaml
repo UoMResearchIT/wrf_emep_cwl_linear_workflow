@@ -1,0 +1,17 @@
+generate_rundir: true
+
+realcores: 2
+
+wrfcores: 9
+
+namelist_real:
+  class: File
+  path: '../input_files/namelists/namelist.input.wrf'
+
+namelist_wrf:
+  class: File
+  path: '../input_files/namelists/namelist.input.wrf'
+
+metdir:
+  class: Directory
+  path: '../input_files/met_files'

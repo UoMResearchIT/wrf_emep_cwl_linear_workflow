@@ -1,0 +1,11 @@
+geodir:
+  class: Directory
+  path: '../input_files/geogrid_geog_input/'
+
+geotable:
+  class: File
+  path: '../input_files/geogrid_tables/GEOGRID.TBL.ARW'
+
+namelist:
+  class: File
+  path: '../input_files/namelists/namelist.wps.geogrid'

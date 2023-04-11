@@ -1,0 +1,15 @@
+emepcores: 9
+
+namelist_emep:
+  class: File
+  path: '../input_files/namelists/config_emep.nml.emep'
+
+metdir_emep:
+  class: Directory
+  path: '../input_files/emep_wrf_input'
+
+inputdir_emep:
+  class: Directory
+  path: '../input_files/emep_input'
+
+runlabel_emep: 'Base' 

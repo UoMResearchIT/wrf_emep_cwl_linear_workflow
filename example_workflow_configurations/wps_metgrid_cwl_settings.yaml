@@ -1,0 +1,59 @@
+generate_metdir: True
+
+namelist_ungrib_atm:
+  class: File
+  path: '../input_files/namelists/namelist.wps.ungrib_atm'
+
+vtable_atm:
+  class: File
+  path: '../input_files/wps_tables/Vtable.ECATM'
+    
+outname_atm: 'ATMFILE'
+  
+grib_files_atm:
+  - class: File
+    path: '../input_files/era5_files/preslev_20200101.grib'
+  - class: File
+    path: '../input_files/era5_files/preslev_20200102.grib'
+  - class: File
+    path: '../input_files/era5_files/preslev_20200103.grib'
+  - class: File
+    path: '../input_files/era5_files/preslev_20200104.grib'
+  - class: File
+    path: '../input_files/era5_files/preslev_20200105.grib'
+  - class: File
+    path: '../input_files/era5_files/preslev_20200106.grib'
+
+namelist_ungrib_sfc:
+  class: File
+  path: '../input_files/namelists/namelist.wps.ungrib_sfc'
+
+vtable_sfc:
+  class: File
+  path: '../input_files/wps_tables/Vtable.ECSFC'
+    
+outname_sfc: 'SFCFILE'
+  
+grib_files_sfc:
+  - class: File
+    path: '../input_files/era5_files/surface_20200101.grib'
+  - class: File
+    path: '../input_files/era5_files/surface_20200102.grib'
+  - class: File
+    path: '../input_files/era5_files/surface_20200103.grib'
+  - class: File
+    path: '../input_files/era5_files/surface_20200104.grib'
+  - class: File
+    path: '../input_files/era5_files/surface_20200105.grib'
+  - class: File
+    path: '../input_files/era5_files/surface_20200106.grib'
+
+
+geo_file:
+  class: File
+  path: '../input_files/wps_datafiles/geo_em.d01.nc'
+
+namelist_metgrid:
+  class: File
+  path: '../input_files/namelists/namelist.wps.metgrid'
+
