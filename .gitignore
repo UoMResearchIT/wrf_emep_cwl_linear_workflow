@@ -1,0 +1,3 @@
+# ignore input data directory (except README)
+input_files/**
+!input_files/README.txt
