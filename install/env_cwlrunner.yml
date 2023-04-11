@@ -5,3 +5,4 @@ channels:
 dependencies:
   - cwltool
   - galaxy-tool-util
+  - nodejs
