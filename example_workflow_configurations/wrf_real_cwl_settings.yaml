@@ -14,4 +14,4 @@ namelist_wrf:
 
 metdir:
   class: Directory
-  path: '../input_files/met_files'
+  path: '../input_files/wrf_met_input'
