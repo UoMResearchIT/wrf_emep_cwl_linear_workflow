@@ -1,20 +1,34 @@
-# wrf_emep_cwl_workflow
+# WRF/EMEP Linear Workflow
 
-Example CWL workflow and tool descriptors for running WPS and WRF.
+Example Common Workflow Language (CWL) workflow and tool descriptors for running the 
+Weather Research and Forecase (WRF) and EMEP models.
 
-Requirements:
+This workflow is designed for a single model domain. Example datasets for testing this 
+workflow can be downloaded from Zenodo.
+
+
+## Requirements:
+
 * docker or singularity
-* CWL
-* Toil - optional, for running on HPC systems
-* example data: `https://www.dropbox.com/s/d1y405qs4c477ol/wps_wrf_uk9km_example_input.tar.gz`
-  * download and extract in your repository directory, this will create the `ungrib_test_input` and `real_wrf_test_input` input directories.
+* cwltool
+* Toil - optional, useful for running on HPC or distributed computing systems
 
-CWL / Toil Installation:
-* CWL only:
+### CWL / Toil Installation:
+
+The workflow runner (either cwltool, or Toil) can be installed using either conda or pip.
+Environment files for conda are included, and can be used as shown below:
+* cwltool only:
   * `conda env create --file install/env_cwlrunner.yml --name cwl`
-* Toil/CWL:
+* Toil & cwltool:
   * `conda env create --file install/env_toil.yml --name toil`
 
+### Setup for Example Workflow
+
+* Download the example dataset from Zenodo: https://doi.org/10.5281/zenodo.7817216
+* Extract into the `input_files` directory:
+  * `tar -zxvf wrf_emep_UK_example_inputs.tar.gz -C input_files --strip-components=1`
+
+## Running the Workflow
 
 Running the ERA5 download tool:
 * Ensure to register for CDS service
@@ -24,17 +38,31 @@ Running the Workflows:
 * `cwltool --relax-path-checks cwl/wps_workflow.cwl wps_cwl_settings.yaml`
 * `cwltool --relax-path-checks cwl/wrf_workflow.cwl wrf_real_cwl_settings.yaml`
 
-Notes:
 
-* `--relax-path-checks` is needed because many wrf filenames contain special characters (`:`)
-* default core usage is 2 cores for real, 2 for wrf. Edit `wrf_real_cwl_settings.yaml` to adjust for your system
-* currently the WPS and WRF workflows are not linked (the `met_em*` files created by WPS have been included in the example input dataset)
-* WRF runtime is currently 12 hours, but met inputs are available for up to 2 months run time if wanted. To change the runtime make these changes:
-  * edit `ungrib_test_input/namelist.wps.emep_uk9km`
-  * edit `real_wrf_test_input/namelist.input.uk9km`
-  * after running WPS workflow, move `met_em*` files into `real_wrf_test_input/met_files`, replacing the files there
+## Notes
 
-Hints:
+### WRF filenames
 
-* add `--cachedir cache-dir` (making sure to create the `cache-dir` directory first), to enable caching of the intermediate results
-* add `--parallel` to run steps in parallel (if possible)
+In order to work with singularity, all filenames need to exclude special characters.
+To ensure that all WRF filenames comply with this requirement, you will need to add the 
+`nocolons = .true.` option to your WPS, REAL and WRF namelists to ensure this.
+
+### MPI parallisation
+
+The WPS processes all run in single thread mode. REAL, WRF and EMEP have been compiled with
+MPI parallisation. The default cores for each of these is 2, 9 and 9, respectively. The 
+settings file can be edited to modify these requirements.
+
+### Caching intermediate workflow steps
+
+To cache the data from individual steps you can use the `--cachedir <cache-dir>` flag.
+
+
+## License and Copyright 
+
+These workflow scripts have been developed by the [Research IT](https://research-it.manchester.ac.uk/) 
+at the [University of Manchester](https://www.manchester.ac.uk/).
+
+Copyright 2023 [University of Manchester, UK](https://www.manchester.ac.uk/).
+
+Licensed under the MIT license, see the LICENSE file for details.
