@@ -39,6 +39,9 @@ inputs:
   cdskey:
     label: API key for CDS service
     type: File
+  https_proxy:
+    label: HTTPS proxy information, if needed
+    type: string?
     
 outputs:
   gribfiles_atm:
@@ -69,6 +72,7 @@ steps:
       west_longitude: west_longitude
       east_longitude: east_longitude
       cdskey: cdskey
+      https_proxy: https_proxy
     out: [grib_files_atm, grib_files_sfc]
 
 $namespaces:
