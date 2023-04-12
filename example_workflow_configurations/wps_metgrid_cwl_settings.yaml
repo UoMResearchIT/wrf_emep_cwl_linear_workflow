@@ -49,9 +49,9 @@ grib_files_sfc:
     path: '../input_files/wps_era5_input/surface_20200106.grib'
 
 
-geo_file:
-  class: File
-  path: '../input_files/wps_geogrid_input/geo_em.d01.nc'
+geo_files:
+  - class: File
+    path: '../input_files/wps_geogrid_input/geo_em.d01.nc'
 
 namelist_metgrid:
   class: File

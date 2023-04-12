@@ -53,9 +53,11 @@ inputs:
   namelist_metgrid:
     label: metgrid configuration
     type: File
-  geo_file:
-    label: geogrid data file
-    type: File
+  geo_files:
+    label: geogrid data files
+    type:
+      type: array
+      items: File
 
   generate_metdir: boolean
     
@@ -112,7 +114,7 @@ steps:
     run: atmos:cwl/WPS/metgrid.cwl
     in:
       namelist: namelist_metgrid
-      geofile: geo_file
+      geofiles: geo_files
       ungribbed_files_a: step2a_ungrib_atm/procfiles
       ungribbed_files_b: step2b_ungrib_sfc/procfiles
       metdir: step0_metdir/metdir
