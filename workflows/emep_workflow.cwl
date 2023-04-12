@@ -1,9 +1,9 @@
 cwlVersion: v1.2
 class: Workflow
 
-#requirements:
-#  InlineJavascriptRequirement: {}
-#  MultipleInputFeatureRequirement: {}
+requirements:
+  InlineJavascriptRequirement: {}
+  MultipleInputFeatureRequirement: {}
 
 inputs:
   namelist_emep:
@@ -11,7 +11,16 @@ inputs:
     type: File
   metdir_emep:
     label: WRF Meteorological Files
-    type: Directory
+    type:
+      - "null"
+      - Directory
+  metfiles_emep:
+    label: WRF Meteorological Files
+    type:
+      - "null"
+      - type: array
+        items: File
+  metdir_name: string?
   inputdir_emep:
     label: EMEP Input Files
     type: Directory
@@ -36,12 +45,24 @@ outputs:
 
 
 steps:
+  step0_create_metdir:
+    run: atmos:cwl/general/create_dir_from_filelist.cwl
+    when: $(inputs.files !== null)
+    in:
+      files: metfiles_emep
+      basename: metdir_name
+    out: [dir]
+  
   step1_emep:
     run: atmos:cwl/EMEP/emep.cwl
     in:
       namelist: namelist_emep
       inputdir: inputdir_emep
-      metdir: metdir_emep
+      metdir: 
+        source:
+          - step0_create_metdir/dir
+          - metdir_emep
+        pickValue: first_non_null
       runlabel: runlabel_emep
       cores: emepcores
     out: [output_files, output_logs]

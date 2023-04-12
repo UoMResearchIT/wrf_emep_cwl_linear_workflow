@@ -53,7 +53,7 @@ steps:
 
   step1_metfile_list:
     label: if we are given a directory containing metfiles, extract these to make an array of files
-    when: $(inputs.metdir != "null")
+    when: $(inputs.directory !== null)
     run: atmos:cwl/general/extract_filelist_from_dir.cwl
     in:
       directory: metdir
