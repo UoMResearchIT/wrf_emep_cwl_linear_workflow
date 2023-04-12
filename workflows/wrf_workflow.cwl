@@ -52,7 +52,7 @@ steps:
     out: [rundir]
 
   step1_metfile_list:
-    label: if we are given a directory with metfile, extract these
+    label: if we are given a directory containing metfiles, extract these to make an array of files
     when: $(inputs.metdir != "null")
     run: atmos:cwl/general/extract_filelist_from_dir.cwl
     in:
