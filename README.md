@@ -110,6 +110,13 @@ cwltool [--cachdir CACHE] [--singularity] workflows/emep_workflow.cwl example_wo
 
 ### Full Workflow
 
+Before running the full workflow make sure you have carried out the setup tasks described
+above.
+
+To run the full workflow use the following command:
+```
+cwltool [--cachdir CACHE] [--singularity] wrf_emep_full_workflow.cwl example_workflow_configurations/wrf_emep_full_workflow_cwl_settings.yaml
+```
 
 ## Notes
 
