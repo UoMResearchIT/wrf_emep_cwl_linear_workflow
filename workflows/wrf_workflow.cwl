@@ -14,8 +14,16 @@ inputs:
     label: WRF Configuration File
     type: File
   metdir:
-    label: Meteorological Files
-    type: Directory
+    label: Meteorological Files (directory)
+    type:
+      - "null"
+      - Directory
+  metfiles:
+    label: Meteorological Files (list)
+    type:
+      - "null"
+      - type: array
+        items: File
   realcores: int
   wrfcores: int
   generate_rundir: boolean
@@ -43,11 +51,23 @@ steps:
       generate_rundir: generate_rundir
     out: [rundir]
 
+  step1_metfile_list:
+    label: if we are given a directory with metfile, extract these
+    when: $(inputs.metdir != "null")
+    run: atmos:cwl/general/extract_filelist_from_dir.cwl
+    in:
+      directory: metdir
+    out: [filelist]
+
   step3_real:
     run: atmos:cwl/WRF/real.cwl
     in:
       namelist: namelist_real
-      metdir: metdir
+      metfiles:
+        source:
+          - step1_metfile_list/filelist
+          - metfiles
+        pickValue: first_non_null
       rundir: step0_rundir/rundir
       cores: realcores
     out: [output_wrfinput, output_wrfbdy, output_wrflowinput, output_wrffdda, output_logs]
