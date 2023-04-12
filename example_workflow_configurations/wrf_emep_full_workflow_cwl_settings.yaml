@@ -1,0 +1,92 @@
+# ERA5 download settings
+start_year: 2020
+start_month: 1
+start_day: 1
+end_year: 2020
+end_month: 1
+end_day: 6
+
+north_latitude: 80
+south_latitude: 40
+west_longitude: -30
+east_longitude: 20
+
+cdskey:
+  class: File
+  path: ../.cdsapirc
+
+https_proxy: "http://proxy.man.ac.uk:3128"
+
+
+# Geogrid settings
+geodir:
+  class: Directory
+  path: '/mnt/data-sets/wrf-geog/4.0/'
+
+geotable:
+  class: File
+  path: '../input_files/geogrid_tables/GEOGRID.TBL.ARW'
+
+namelist_geogrid:
+  class: File
+  path: '../input_files/namelists/namelist.wps.geogrid'
+
+# WPS settings
+generate_metdir: True
+
+namelist_ungrib_atm:
+  class: File
+  path: '../input_files/namelists/namelist.wps.ungrib_atm'
+
+vtable_atm:
+  class: File
+  path: '../input_files/wps_tables/Vtable.ECATM'
+    
+outname_atm: 'ATMFILE'
+  
+namelist_ungrib_sfc:
+  class: File
+  path: '../input_files/namelists/namelist.wps.ungrib_sfc'
+
+vtable_sfc:
+  class: File
+  path: '../input_files/wps_tables/Vtable.ECSFC'
+    
+outname_sfc: 'SFCFILE'
+
+namelist_metgrid:
+  class: File
+  path: '../input_files/namelists/namelist.wps.metgrid'
+
+generate_rundir: true
+
+
+# WRF settings
+
+realcores: 2
+
+wrfcores: 9
+
+namelist_real:
+  class: File
+  path: '../input_files/namelists/namelist.input.wrf'
+
+namelist_wrf:
+  class: File
+  path: '../input_files/namelists/namelist.input.wrf'
+
+# EMEP settings
+
+emepcores: 9
+
+namelist_emep:
+  class: File
+  path: '../input_files/namelists/config_emep.nml.emep'
+
+inputdir_emep:
+  class: Directory
+  path: '../input_files/emep_input'
+
+metdir_name: 'emep_wrf_input'
+
+runlabel_emep: 'Base' 
