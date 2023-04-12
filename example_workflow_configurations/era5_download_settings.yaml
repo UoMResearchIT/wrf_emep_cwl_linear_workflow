@@ -14,3 +14,4 @@ cdskey:
   class: File
   path: ../.cdsapirc
 
+https_proxy: "http://proxy.man.ac.uk:3128"

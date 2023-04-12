@@ -1,6 +1,6 @@
 geodir:
   class: Directory
-  path: '../input_files/geogrid_geog_input/'
+  path: '/mnt/data-sets/wrf-geog/4.0/'
 
 geotable:
   class: File
